@@ -6,7 +6,8 @@ Given the two table:
 SQL Statement below.
 
 
-SELECT T1.id, T1.name,T1.age
+SELECT T1.id, T1.name,T1.age 
+
 FROM T1
 INNER JOIN T2    
 ON T1.id = T1.id; T2.name, T2.age
