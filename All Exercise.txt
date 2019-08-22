@@ -1,0 +1,141 @@
+
+package com.example.dozie;
+
+public class Solution {
+	
+	//Given arrayValues = [1, 3, 6, 4, 1, 2], the function should return 5.
+	//Given arrayValues = [5, -1, -3], the function should return 1.
+	
+	public static int solution(int[] arrayValues) {
+
+	    int N = arrayValues.length;
+
+	    int[] C = new int[N];
+
+	 
+	    for (int i = 0; i < N; i++) {
+
+	        // Need an absolute value for the duplicates
+	       
+	        int j = Math.abs(arrayValues[i]) - 1;
+
+	        if (j >= 0 && j < N && arrayValues[j] > 0) {
+	            C[j] = -arrayValues[j];
+	        }
+	    }
+
+	    for (int i = 0; i < N; i++) {
+
+	        if (C[i] == 0) {
+	            return i + 1;
+	        }
+	    }
+
+	    return N + 1;
+	}
+
+}
+
+
+
+Exercise 2. 
+
+Given the two table:
+
+SQL Statement below.
+
+
+SELECT T1.id, T1.name,T1.age 
+
+FROM T1
+INNER JOIN T2    
+ON T1.id = T1.id; T2.name, T2.age
+
+
+
+Exercise 3
+package com.exercise.CrudeOperationApplication.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.exercise.crudProject.model.Stock;
+
+public interface StockDao extends CrudRepository<Stock, Integer> {
+	
+	List <Stock> findByid(String id);
+	List <Stock> findbyGreaterthan(int id);
+
+}
+
+
+package com.exercise.crudProject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.exercise.CrudeOperationApplication.dao.StockDao;
+
+@Controller
+public class StockController {
+	
+	@RequestMapping
+	public String Stock() {
+		
+		return "home.jsp";
+	}
+
+	@Autowired
+	StockDao stock;
+	
+	@RequestMapping("/addStock")
+	public String addStock() {
+		
+		return "home.jsp";
+		
+		
+	}
+	
+	@RequestMapping("/addstock"){
+	
+		public String addStock(Stock stock) {
+		stock.save(stock);
+		
+		return "home.jsp";
+	}
+	
+	
+}
+
+
+
+//DataBase
+insert into Stock Values(2,  200, 02092019, 03062019, 'Nnamdi',);
+
+
+
+home.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Update the stock here</h1>
+<form action = viewStock> </form>
+id<input type = "number" name = "id"><br><br>
+
+Name<input type = "text" name = "name"><br><br>
+Current Price<input type = "number" name = "currentPrice"><br><br>
+Date Created<input type = "date" name = "dateCreated"><br><br>
+Last date Updated<input type = "date" name = "lastdateupdated"><br><br>
+<input type = submit>
+
+
+</body>
+</html>
